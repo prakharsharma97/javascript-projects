@@ -37,8 +37,7 @@ const reviews = [
       "Edison bulb put a bird on it humblebrag, marfa pok pok heirloom fashion axe cray stumptown venmo actually seitan. VHS farm-to-table schlitz, edison bulb pop-up 3 wolf moon tote bag street art shabby chic. ",
   },
 ];
-
-//select items
+// select items
 const img = document.getElementById("person-img");
 const author = document.getElementById("author");
 const job = document.getElementById("job");
@@ -48,45 +47,46 @@ const prevBtn = document.querySelector(".prev-btn");
 const nextBtn = document.querySelector(".next-btn");
 const randomBtn = document.querySelector(".random-btn");
 
-//set starting item
+// set starting item
 let currentItem = 0;
 
 // load initial item
-window.addEventListener("DOMContentLoader",function(){
-  showPerson();
-});
-
-//showe person based on item
-
-function showPerson(){
+window.addEventListener("DOMContentLoaded", function () {
   const item = reviews[currentItem];
   img.src = item.img;
   author.textContent = item.name;
   job.textContent = item.job;
   info.textContent = item.text;
-}
+});
 
-//show next person
+// show person based on item
+function showPerson(person) {
+  const item = reviews[person];
+  img.src = item.img;
+  author.textContent = item.name;
+  job.textContent = item.job;
+  info.textContent = item.text;
+}
+// show next person
 nextBtn.addEventListener("click", function () {
   currentItem++;
   if (currentItem > reviews.length - 1) {
     currentItem = 0;
   }
-  showPerson();
+  showPerson(currentItem);
 });
-
 // show prev person
 prevBtn.addEventListener("click", function () {
   currentItem--;
   if (currentItem < 0) {
     currentItem = reviews.length - 1;
   }
-  showPerson();
+  showPerson(currentItem);
 });
+// show random person
+randomBtn.addEventListener("click", function () {
+  console.log("hello");
 
-//show random person
-  randomBtn.addEventListener("click", function(){
-    currentItem = Math.floor(Math.random() * reviews.length)
-    console.log (currentItem);
-    showPerson();
-  });
+  currentItem = Math.floor(Math.random() * reviews.length);
+  showPerson(currentItem);
+});
